@@ -8,15 +8,13 @@ import { promisify } from 'node:util'
 const pump = promisify(pipeline)
 
 export async function uploadRoutes(app: FastifyInstance){
-  app.addHook('preHandler', async (request) => {
-    await request.jwtVerify()
-  })
   app.post('/upload', async (request, reply) => {
    const upload = await request.file({
     limits: {
       fileSize: 5_242_880, // 5MB
     }
    })
+   console.log('hello')
 
    if(! upload) {
     return reply.status(400).send()
@@ -28,6 +26,7 @@ export async function uploadRoutes(app: FastifyInstance){
    if(!isValidFileFormat){
     return reply.status(400).send()
    }
+
 
    const fileId = randomUUID()
    const extension = extname(upload.filename)
@@ -41,5 +40,6 @@ export async function uploadRoutes(app: FastifyInstance){
    const fullUrl = request.protocol.concat('://').concat(request.hostname)
    const fileUrl = new URL(`/uploads/${fileName}`, fullUrl).toString()
 
+   return {fileUrl}
   })
 }
