@@ -28,5 +28,8 @@
     "axios": "^1.4.0",
     "fastify": "^4.17.0",
     "zod": "^3.21.4"
+  },
+  "prisma": {
+    "schema": "prisma/schema.prisma"
   }
 }

@@ -28,6 +28,7 @@ app.register(jwt, {
 app.register(authRoutes)
 app.register(uploadRoutes)
 app.register(memoriesRoutes)
+
 app
   .listen({
     port: 3333,
