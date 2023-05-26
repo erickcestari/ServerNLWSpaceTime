@@ -83,9 +83,9 @@ export async function memoriesRoutes(app: FastifyInstance) {
       isPublic: z.coerce.boolean().default(false),
     })
 
-    const {id} = paramSchema.parse(request)
+    const {id} = paramSchema.parse(request.params)
 
-    const {coverUrl, content, isPublic} = bodySchema.parse(request)
+    const {coverUrl, content, isPublic} = bodySchema.parse(request.body)
 
     let memory = await prisma.memory.findUniqueOrThrow({
       where: {
