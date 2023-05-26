@@ -31,8 +31,8 @@ export async function memoriesRoutes(app: FastifyInstance) {
     const paramSchema = z.object({
       id: z.string().uuid()
     })
-
-    const {id} = paramSchema.parse(request)
+    
+    const {id} = paramSchema.parse(request.params)
 
     const memory = await prisma.memory.findUniqueOrThrow({
       where: {
@@ -58,8 +58,7 @@ export async function memoriesRoutes(app: FastifyInstance) {
 
     
     const {content, isPublic, coverUrl} = bodySchema.parse(request.body)
-    
-    console.log('working')
+
     const memory = await prisma.memory.create({
       data: {
         content,
