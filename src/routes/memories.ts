@@ -116,7 +116,7 @@ export async function memoriesRoutes(app: FastifyInstance) {
       id: z.string().uuid(),
     })
 
-    const {id} = paramSchema.parse(request)
+    const {id} = paramSchema.parse(request.params)
 
     const memory = await prisma.memory.findUniqueOrThrow({
       where: {
